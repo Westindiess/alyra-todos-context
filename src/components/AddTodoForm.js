@@ -1,24 +1,40 @@
-const AddTodoForm = (props) => {
-  const { addTodo } = props
-  const handleFormSubmit = (event) => {
-    event.preventDefault()
-    const newTodoText = event.target.elements.todo.value
-    addTodo(newTodoText)
-    event.target.reset()
-  }
-  return (
-    <form onSubmit={handleFormSubmit}>
-      <div className="input-group mb-2">
-        <label className="input-group-text" htmlFor="todo">
-          Ajouter une tâche
-        </label>
-        <input className="form-control" id="todo" required />
-      </div>
-      <button type="submit" className="btn btn-primary">
-        allons-y !
-      </button>
-    </form>
-  )
+import { v4 as uuidv4 } from "uuid"
+import { useDarkMode } from "../context/DMContext"
+import { useTodosDispatchContext } from "../context/TodosContext"
+
+const AddTodoForm = () => {
+	const darkMode = useDarkMode()
+	const dispatch = useTodosDispatchContext()
+	const darkModeClass = darkMode ? "text-white bg-dark" : ""
+
+	const addTodo = (text) => {
+		const newTodo = {
+			text,
+			isCompleted: false,
+			id: uuidv4(),
+		}
+		dispatch({ type: "ADD", payload: newTodo })
+	}
+
+	const handleFormSubmit = (event) => {
+		event.preventDefault()
+		const newTodoText = event.target.elements.todo.value
+		addTodo(newTodoText)
+		event.target.reset()
+	}
+	return (
+		<form onSubmit={handleFormSubmit}>
+			<div className="input-group mb-2">
+				<label className={`input-group-text ${darkModeClass}`} htmlFor="todo">
+					Ajouter une tâche
+				</label>
+				<input className={`form-control ${darkModeClass}`} id="todo" required />
+			</div>
+			<button type="submit" className="btn btn-primary">
+				allons-y !
+			</button>
+		</form>
+	)
 }
 
 export default AddTodoForm
