@@ -5,18 +5,14 @@ const NavBar = () => {
 	return (
 		<nav className="navbar-expand ">
 			<ul className="navbar-nav ">
-				<li className=" m-2 ">
+				<li className=" m-3">
 					<NavLink to="/">Home</NavLink>
 				</li>
-				<li className="nav-item">
-					<a className="nav-link" href="#">
-						<NavLink to="/todos">Todos</NavLink>
-					</a>
+				<li className=" m-3">
+					<NavLink to="/todos">Todos</NavLink>
 				</li>
-				<li className="nav-item">
-					<a className="nav-link" href="#">
-						<NavLink to="/login">Login</NavLink>
-					</a>
+				<li className=" m-3">
+					<NavLink to="/login">Login</NavLink>
 				</li>
 			</ul>
 		</nav>
